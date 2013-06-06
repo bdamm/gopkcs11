@@ -17,3 +17,6 @@ all:
 #  -import_syscall=true: import syscall in generated code
 #  -objdir="": object directory
 #
+
+clean:
+	go clean
