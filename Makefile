@@ -1,5 +1,6 @@
+
 all:
-	go tool cgo pkcs11.go
+	go build pkcs11.go
 
 # Usage notes for cgo
 #usage: cgo -- [compiler options] file.go ...

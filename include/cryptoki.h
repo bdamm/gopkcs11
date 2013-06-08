@@ -23,10 +23,16 @@
 #ifndef ___CRYPTOKI_H_INC___
 #define ___CRYPTOKI_H_INC___
 
+#include <gopk11_sys.h>
+#ifdef OS_WIN
 #pragma pack(push, cryptoki, 1)
 
 /* Specifies that the function is a DLL entry point. */
 #define CK_IMPORT_SPEC __declspec(dllimport)
+#else
+/* Under non-Windows environments, all functions are exported. */
+#define CK_IMPORT_SPEC 
+#endif
 
 /* Define CRYPTOKI_EXPORTS during the build of cryptoki libraries. Do
  * not define it in applications.
@@ -38,8 +44,12 @@
 #define CK_EXPORT_SPEC CK_IMPORT_SPEC 
 #endif
 
+#ifdef OS_WIN
 /* Ensures the calling convention for Win32 builds */
 #define CK_CALL_SPEC __cdecl
+#else
+#define CK_CALL_SPEC
+#endif
 
 #define CK_PTR *
 
@@ -61,6 +71,8 @@
 
 #include "pkcs11.h"
 
+#ifdef OS_WIN
 #pragma pack(pop, cryptoki)
+#endif
 
 #endif /* ___CRYPTOKI_H_INC___ */
